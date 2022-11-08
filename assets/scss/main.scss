@@ -1,0 +1,160 @@
+@import "./_variables.scss";
+@import "../../node_modules/bootstrap/scss/bootstrap";
+@import "./_overrides.scss";
+@import "./custom.scss";
+@import "./loaders.scss";
+
+@import url('https://fonts.googleapis.com/css2?family=Bungee&family=Potta+One&display=swap');
+
+
+body {
+  display: flex;
+  font-family: 'Bungee', cursive;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: $body-bg;
+  overflow: hidden;
+}
+
+.hira {
+  font-family: 'Potta One', cursive;
+}
+
+.flex {
+  flex: auto;
+}
+
+.flex-grow {
+  flex-grow: 1;
+}
+
+
+main {
+  flex-grow: 1;
+}
+
+.machine {
+  min-height: 15vh;
+}
+
+.turn-handle {
+  transition: all .5s ease;
+  transform: rotate(0deg);
+
+  &:focus {
+    transform: rotate(270deg);
+  }
+}
+
+.emoji {
+  font-size: 300px;
+}
+
+.title {
+  color: $warning;
+  -webkit-text-stroke: 2px $light;
+  font-size: 48px !important;
+  letter-spacing: -15px;
+}
+
+.collectable {
+  transform: scale(0);
+  animation: collected 1s forwards cubic-bezier(.17, .67, .56, 1.15);
+
+  &::before {
+    content: '💽';
+    animation: card-pack .6s linear forwards;
+    z-index: 1000;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+  }
+}
+
+.reveal {
+  opacity: 1;
+  animation: reveal .6s linear backwards;
+}
+
+.color-1 {
+  animation-timing-function: cubic-bezier(.67, .24, .56, 1.25);
+}
+
+.color-2 {
+  filter: drop-shadow(0px 0px 5px #ff552a) hue-rotate(20deg);
+  animation-timing-function: cubic-bezier(.17, .67, .56, 1.15);
+  animation-delay: .1s;
+}
+
+.color-3 {
+  filter: drop-shadow(0px 0px 5px #ff2a8d) invert(100%) hue-rotate(45deg);
+  position: relative;
+  animation-delay: .5s;
+  animation-duration: .8s;
+  animation-timing-function: cubic-bezier(.86, .04, .4, 1.2);
+
+  &::after {
+    content: '';
+    animation: glow 1s linear alternate infinite;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+  }
+}
+
+@keyframes collected {
+  0% {
+    transform: scale(0) rotate3d(1, 0, 0, 180deg);
+  }
+
+  90% {
+    transform: scale(1.5) rotate3d(0, 0, 0, 180deg);
+  }
+
+  100% {
+    transform: scale(1) rotate3d(0, 0, 0, 180deg);
+  }
+}
+
+@keyframes card-pack {
+  0% {
+    opacity: 1;
+  }
+
+  90% {
+    opacity: 1;
+    z-index: unset;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes reveal {
+  0% {
+    opacity: 0;
+  }
+
+  90% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes glow {
+  0% {
+    backdrop-filter: drop-shadow(0px 0px 5px #2a63ff);
+  }
+
+  100% {
+    backdrop-filter: drop-shadow(0px 0px 20px #2a63ff);
+  }
+}
